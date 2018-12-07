@@ -21,10 +21,10 @@ endif()
 set(IBAPI_PATH ./ibapi/linux)
 include_directories(${IBAPI_PATH}/client)
 
-set(IBAPI_LIBRARY )
+set(IBAPI_LIBRARY)
 find_library(IBAPI_LIBRARY
   NAMES twsapi.so
-  PATHS ${IBAPI_PATH}/build/lib) 
+  PATHS ${IBAPI_PATH}/lib) 
 
 # 设置编译源文件
 set (vnib )
@@ -39,7 +39,7 @@ if (BUILD_IB)
 endif()
 
 # 设置Python所在的目录
-set(PYTHON_LIBRARY )
+set(PYTHON_LIBRARY /usr/lib/python3.6)
 if (WIN32)
 set(PYTHON_INCLUDE_PATH C:/Python27/include)
 find_library(PYTHON_LIBRARY
@@ -47,10 +47,10 @@ find_library(PYTHON_LIBRARY
   PATHS C:/Python27/libs)
 include_directories(${PYTHON_INCLUDE_PATH})
 else()
-set(PYTHON_INCLUDE_PATH /usr/include/python2.7/)
+set(PYTHON_INCLUDE_PATH /usr/include/python3.6m/)
 find_library(PYTHON_LIBRARY
-  NAMES python2.7
-  PATHS /usr/lib/x86_64-linux-gnu)
+  NAMES python3.6
+  PATHS /usr/lib/python3.6)
 include_directories(${PYTHON_INCLUDE_PATH})
 endif()
 
@@ -59,7 +59,7 @@ if (WIN32)
     set(Boost_USE_STATIC_LIBS        ON)    #链接boost静态库
 endif()
 set(Boost_USE_MULTITHREADED      ON)
-find_package(Boost 1.55.0 COMPONENTS python thread date_time system chrono REQUIRED) # 如果boost库没有完全编译，需要将编译的库明确地指出，否者message(${Boost_LIBRARIES})会出错
+find_package(Boost 1.55.0 COMPONENTS python37 thread date_time system chrono REQUIRED) # 如果boost库没有完全编译，需要将编译的库明确地指出，否者message(${Boost_LIBRARIES})会出错
 if(Boost_FOUND)
   include_directories(${Boost_INCLUDE_DIRS})
 endif()
